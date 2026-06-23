@@ -70,24 +70,24 @@ int main() {
    std::cout << "Choose the academic task: ";
    std::cin >> academic_task;
 
-   std::vector <int> written_works_scores;
-   std::vector <int> written_works_items;
-   int written_works_total_scores = 0;
-   int written_works_total_items = 0;
+   std::vector <int> scores;
+   std::vector <int> items;
+   int total_scores = 0;
+   int total_items = 0;
 
    while (true) {
 
       int score = 0;
-      int items = 0;
+      int item = 0;
 
       std::cout << "Enter score: ";
       std::cin >> score;
 
       std::cout << "Enter items: ";
-      std::cin >> items;
+      std::cin >> item;
 
-      written_works_scores.push_back(score);
-      written_works_items.push_back(items);
+      scores.push_back(score);
+      items.push_back(item);
 
       int choice;
 
@@ -107,29 +107,29 @@ int main() {
    file << "Written Works: " << std::endl;
 
    file << "Scores: ";
-   for (const auto& scores : written_works_scores) {
-      file << scores << ' ';
+   for (const auto& score : scores) {
+      file << score << ' ';
    }
 
    file << "\nItems: ";
-   for (const auto& items : written_works_items) {
-      file << items << ' ';
+   for (const auto& item : items) {
+      file << item << ' ';
    }
 
    file << "\nTotal Scores: ";
-   for (int list_of_scores : written_works_scores) {
-      written_works_total_scores += list_of_scores;
+   for (const auto& list_of_scores : scores) {
+      total_scores += list_of_scores;
    }
-   file << written_works_total_scores;
+   file << total_scores;
 
    file << "\nTotal items: ";
-   for (const auto& total_items : written_works_items) {
-      written_works_total_items += total_items;
+   for (const auto& list_of_items : items) {
+      total_items += list_of_items;
    }
-   file << written_works_total_items;
+   file << total_items;
 
-   double written_works_weight = (static_cast<double>(written_works_total_scores) / written_works_total_items) * 40;
-   std::cout << std::fixed << std::setprecision(2) << written_works_weight;
+   double weight = (static_cast<double>(total_scores) / total_items) * 40;
+   std::cout << std::fixed << std::setprecision(2) << weight;
    
    return 0;
 

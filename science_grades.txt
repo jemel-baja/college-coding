@@ -1,13 +1,5 @@
-1
-Scores: 
-Items: 
-Total Scores: 0
-Total items: 01
-Scores: 
-Items: 
-Total Scores: 0
-Total items: 01
-Scores: 
-Items: 
-Total Scores: 0
-Total Items: 0
+Written Works: 
+Scores: 17 18 
+Items: 20 20 
+Total Scores: 35
+Total items: 40

@@ -50,6 +50,42 @@ void add_scores(std::vector <int> group_of_scores, std::vector <int> group_of_it
    }
 }
 
+void add_scores_to_files(int academic_task, std::vector <int> list_of_scores, std::vector <int> list_of_items, int total_scores, int total_items) {
+
+   std::ofstream file("science_grades.txt", std::ios::app);
+
+   total_scores = 0;
+   total_items = 0;
+
+   file << academic_task << std::endl;
+
+   file << "Scores: ";
+   for (const auto& individual_scores : list_of_scores) {
+      file << individual_scores << ' ';
+   }
+
+   file << "\nItems: ";
+   for (const auto& individual_items : list_of_items) {
+      file << individual_items << ' ';
+   }
+
+   file << "\nTotal Scores: ";
+   for (int list_of_scores_loop : list_of_scores) {
+      total_scores += list_of_scores_loop;
+   }
+   file << total_scores;
+
+   file << "\nTotal items: ";
+   for (const auto& list_of_items_loops : list_of_items) {
+      total_items += list_of_items_loops;
+   }
+   file << total_items;
+
+   double weight = (static_cast<double>(total_scores) / total_items) * 40;
+   std::cout << std::fixed << std::setprecision(2) << weight;
+}
+
+
 void task_1() {
    int academic_task;
 
@@ -84,9 +120,10 @@ void task_1() {
 
    if (academic_task == 1) {
       add_scores(written_works_scores, written_works_items, ww_total_scores, ww_total_items);
-   } else if (academic_task = 2) {
+      add_scores_to_files(academic_task, written_works_scores, written_works_items, ww_total_scores, ww_total_items);
+   } else if (academic_task == 2) {
       add_scores(performance_tasks_scores, performance_tasks_items, pt_total_scores, pt_total_items);
-   } else if (academic_task = 3) {
+   } else if (academic_task == 3) {
       add_scores(quarterly_assessment_scores, quarterly_assessment_items, qa_total_scores, qa_total_items);
    } else {
       std::cout << "Error!";
@@ -152,38 +189,6 @@ int main() {
          std::cout << "Option does not exist.";
       }
    }
-   
-
-   // Create file
-
-   std::ofstream file("science_grades.txt");
-
-   file << "Written Works: " << std::endl;
-
-   file << "Scores: ";
-   for (const auto& scores : written_works_scores) {
-      file << scores << ' ';
-   }
-
-   file << "\nItems: ";
-   for (const auto& items : written_works_items) {
-      file << items << ' ';
-   }
-
-   file << "\nTotal Scores: ";
-   for (int list_of_scores : written_works_scores) {
-      written_works_total_scores += list_of_scores;
-   }
-   file << written_works_total_scores;
-
-   file << "\nTotal items: ";
-   for (const auto& total_items : written_works_items) {
-      written_works_total_items += total_items;
-   }
-   file << written_works_total_items;
-
-   double written_works_weight = (static_cast<double>(written_works_total_scores) / written_works_total_items) * 40;
-   std::cout << std::fixed << std::setprecision(2) << written_works_weight;
    
    return 0;
 

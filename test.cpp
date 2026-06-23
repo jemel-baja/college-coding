@@ -259,7 +259,7 @@ int main() {
    std::cout << std::endl;
 
    std::cout << "THANK YOU FOR USING THE SCIENCE GRADE CALCULATOR!";
-   std::cout << std::endl;
+   std::cout << std::endl; 
 
    std::cout << std::endl;
    std::cout << "=====================================================" << std::endl;
@@ -268,3 +268,9 @@ int main() {
    return 0;
 
 }
+
+/*
+
+   
+
+*/

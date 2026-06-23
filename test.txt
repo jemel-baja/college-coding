@@ -1,25 +1,17 @@
 
 Written Works
-Scores: 7 8 9 9 10 17 17 18 19 20 
-Items: 10 10 10 10 10 20 20 20 20 20 
-Total Scores: 134
-Total items: 150
-Performance Tasks
-Scores: 96 
-Items: 100 
-Total Scores: 96
-Total items: 100
-Quarterly Assessment
-Scores: 74 
-Items: 75 
-Total Scores: 74
-Total items: 75
+Scores: 19 
+Items: 20 
+Total Scores: 19
+Total items: 20
+Current weight: 38.00
+
 Written Works
-Scores: 18 19 20 20 29 
-Items: 20 20 20 20 30 
-Total Scores: 106
-Total items: 110
-Current weight: 38.55
+Scores: 19 20 
+Items: 20 20 
+Total Scores: 39
+Total items: 40
+Current weight: 39.00
 
 Performance Tasks
 Scores: 97 
@@ -29,11 +21,11 @@ Total items: 100
 Current weight: 38.80
 
 Written Works
-Scores: 15 18 19 
+Scores: 19 19 20 
 Items: 20 20 20 
-Total Scores: 52
+Total Scores: 58
 Total items: 60
-Current weight: 34.67
+Current weight: 38.67
 
 Performance Tasks
 Scores: 97 
@@ -42,9 +34,16 @@ Total Scores: 97
 Total items: 100
 Current weight: 38.80
 
-Quarterly Assessment
-Scores: 75 
-Items: 75 
-Total Scores: 75
-Total items: 75
-Current weight: 20.00
+Written Works
+Scores: 18 19 20 
+Items: 20 20 20 
+Total Scores: 57
+Total items: 60
+Current weight: 38.00
+
+Performance Tasks
+Scores: 97 
+Items: 100 
+Total Scores: 97
+Total items: 100
+Current weight: 38.80

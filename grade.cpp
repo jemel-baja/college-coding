@@ -20,54 +20,10 @@
 #include <fstream>
 #include <iomanip>
 
+void add_scores(std::vector <int> group_of_scores, std::vector <int> group_of_items, int total_scores, int total_items) {
 
-
-int main() {
-
-   // Get student's information
-
-   // std::string name, section, subject;
-   // int student_number, year_level;
-
-   // std::cout << std::endl;
-   // std::cout << "WELCOME TO THE SCIENCE GRADE PREDICTOR!" << std::endl;
-   // std::cout << std::endl;
-   // std::cout << "--------------------------------------------------" << std::endl;
-   // std::cout << std::endl;
-
-   // std::cout << "What is your name?: ";
-   // getline(std::cin, name); // use this to accept strings with whitespace
-
-   // std::cout << std::endl;
-   // std::cout << "What is your student number?: ";
-   // std::cin >> student_number;
-
-   // std::cout << std::endl;
-   // std::cout << "What is your year level?: ";
-   // std::cin >> year_level;
-
-   // std::cin.ignore();  // clear leftover newline
-   
-   // std::cout << std::endl;
-   // std::cout << "What is your section?: ";
-   // getline(std::cin, section);
-
-   // // std::cout << std::endl;
-   // // std::cout << "What subject you want to predict your grade in: ";
-   // // getline(std::cin, subject);
-
-   // std::cout << std::endl;
-
-   // std::cout << "--------------------------------------------------" << std::endl;
-
-   // std::cout << std::endl;
-
-   std::vector <int> written_works_scores;
-   std::vector <int> written_works_items;
-   int written_works_total_scores = 0;
-   int written_works_total_items = 0;
-   
-
+   total_scores = 0;
+   total_items = 0;
 
    while (true) {
 
@@ -80,8 +36,8 @@ int main() {
       std::cout << "Enter items: ";
       std::cin >> items;
 
-      written_works_scores.push_back(score);
-      written_works_items.push_back(items);
+      group_of_scores.push_back(score);
+      group_of_scores.push_back(items);
 
       int choice;
 
@@ -92,7 +48,111 @@ int main() {
          break;
       }
    }
+}
 
+void task_1() {
+   int academic_task;
+
+   std::cout << std::endl;
+
+   std::cout << "Academic Tasks" << std::endl;
+
+   std::cout << "[1] Written Works"<< std::endl;
+   std::cout << "[2] Performance Tasks" << std::endl;
+   std::cout << "[3] Quarterly Assessment" << std::endl;
+
+   std::cout << std::endl;
+   std::cout << "=====================================================" << std::endl;
+
+   std::cout << "Choose the academic task: ";
+   std::cin >> academic_task;
+
+   std::vector <int> written_works_scores;
+   std::vector <int> written_works_items;
+   int ww_total_scores = 0;
+   int ww_total_items = 0;
+
+   std::vector <int> performance_tasks_scores;
+   std::vector <int> performance_tasks_items;
+   int pt_total_scores = 0;
+   int pt_total_items = 0;
+
+   std::vector <int> quarterly_assessment_scores;
+   std::vector <int> quarterly_assessment_items;
+   int qa_total_scores = 0;
+   int qa_total_items = 0;
+
+   if (academic_task == 1) {
+      add_scores(written_works_scores, written_works_items, ww_total_scores, ww_total_items);
+   } else if (academic_task = 2) {
+      add_scores(performance_tasks_scores, performance_tasks_items, pt_total_scores, pt_total_items);
+   } else if (academic_task = 3) {
+      add_scores(quarterly_assessment_scores, quarterly_assessment_items, qa_total_scores, qa_total_items);
+   } else {
+      std::cout << "Error!";
+   }
+}
+
+int main() {
+
+   // STEP 01. GET STUDENT'S INFORMATION
+
+   std::string name, section, subject;
+   int student_number, year_level;
+
+   std::cout << std::endl;
+   std::cout << "WELCOME TO THE SCIENCE GRADE PREDICTOR!" << std::endl;
+   std::cout << std::endl;
+   std::cout << "=====================================================" << std::endl;
+   std::cout << std::endl;
+
+   std::cout << "What is your name?: ";
+   getline(std::cin, name); // use this to accept strings with whitespace
+
+   std::cout << std::endl;
+   std::cout << "What is your student number?: ";
+   std::cin >> student_number;
+
+   std::cout << std::endl;
+   std::cout << "What is your year level?: ";
+   std::cin >> year_level;
+
+   std::cin.ignore();  // clear leftover newline
+   
+   std::cout << std::endl;
+   std::cout << "What is your section?: ";
+   getline(std::cin, section);
+
+   std::cout << std::endl;
+
+   std::cout << "=====================================================" << std::endl;
+   std::cout << std::endl;
+
+   while(true) {
+      
+      int task;
+      std::cout << "[1] Add scores" << std::endl;
+      std::cout << "[2] View scores" << std::endl;
+      std::cout << "[3] Predict Grade" << std::endl;
+      std::cout << "[4] Exit" << std::endl;
+      std::cout << std::endl;
+
+      std::cout << "What do you want to do today?: ";
+      std::cin >> task;
+
+      if(task == 1) {
+         task_1();
+      } else if (task == 2) {
+
+      } else if (task == 3) {
+
+      } else if (task == 4) {
+         break;
+      } else {
+         std::cout << "Option does not exist.";
+      }
+   }
+   
 
    // Create file
 

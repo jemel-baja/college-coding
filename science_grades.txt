@@ -1,5 +1,5 @@
-Written Works: 
-Scores: 11 15 20 
-Items: 20 20 20 
-Total Scores: 46
-Total items: 60
+1
+Scores: 
+Items: 
+Total Scores: 0
+Total items: 0

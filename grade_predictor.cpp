@@ -66,24 +66,23 @@ class Summative_Tests {
 
       double calculate_weight() {
 
-         if(total_items == 0) {
-            return 00.00;
-         } else {
-            for (const auto& list_of_scores : scores) {
-               total_scores += list_of_scores;
-            }
-
-            for (const auto& list_of_items : items) {
-               total_items += list_of_items;
-            }
-
-            weight = (static_cast<double>(total_scores) / total_items) * percentage;
-
-            
-            weight = round(weight * 100) / 100;
-
-            return weight;
+         for (const auto& list_of_scores : scores) {
+            total_scores += list_of_scores;
          }
+
+         for (const auto& list_of_items : items) {
+            total_items += list_of_items;
+         }
+      
+         std::cout << summative_test << " Total Scores: " << total_scores << std::endl;
+
+         std::cout << summative_test << " Total Items: " << total_items << std::endl;
+
+         weight = (static_cast<double>(total_scores) / total_items) * percentage;
+         
+         weight = round(weight * 100) / 100;
+
+         return weight;
       }
 };
 
@@ -107,14 +106,6 @@ class Quarterly_Assessments : public Summative_Tests {
          changeValues("Quarterly Assessments", 20);
       }
 };
-
-Written_Works written_works;
-Performance_Tasks performance_tasks;
-Quarterly_Assessments quarterly_assessment;
-
-void add_scores_for_task_1(std::vector <int>& scores, std::vector <int>& items, Summative_Tests& summative_tests) {
-   
-}
 
 double task_1() {
    std::string summative_test;
@@ -144,10 +135,12 @@ double task_1() {
    std::cout << "=====================================================" << std::endl;
    std::cout << std::endl;
 
+   Written_Works written_works;
    std::vector <int> written_works_scores;
    std::vector <int> written_works_items;
    double ww_weight = 00.00;
 
+   
    std::vector <int> performance_tasks_scores;
    std::vector <int> performance_tasks_items;
    int pt_total_scores = 0;
@@ -175,13 +168,11 @@ double task_1() {
          if (choice == 0) {
             break;
          }
-
-         std::cout << "Written Works Weight: " << written_works.calculate_weight();
-   }
+      }
    } else if (summative_test == "Performance Tasks") {
-      add_scores_for_task_1(performance_tasks_scores, performance_tasks_items, performance_tasks);
+      
    } else if (summative_test == "Quarterly Assessment") {
-      add_scores_for_task_1(quarterly_assessment_scores, quarterly_assessment_items, quarterly_assessment);
+
    } else {
       std::cout << "Error!";
       std::cout << std::endl;
@@ -193,7 +184,12 @@ double task_1() {
 }
 
 double predict_grade() {
-   double grade = written_works.calculate_weight() + performance_tasks.calculate_weight() + quarterly_assessment.calculate_weight();
+   Written_Works written_works;
+   Performance_Tasks performance_tasks;
+   Quarterly_Assessments quarterly_assessments;
+
+   double grade = written_works.calculate_weight() + performance_tasks.calculate_weight() + quarterly_assessments.calculate_weight();
+
    return grade;
 }
 
@@ -227,7 +223,7 @@ int main() {
    // std::cout << "What is your section?: ";
    // getline(std::cin, section);
 
-   double grade = predict_grade();
+   double grade = 00.00;
    double ww_weight = 00.00;
    double pt_weight = 00.00;
    double qa_weight = 00.00;
@@ -257,9 +253,9 @@ int main() {
          std::cout << std::endl;
          std::cout << "Please see the .txt file to see your scores and grade." << std::endl;
       } else if (task == 3) {
-         std::cout << "Predicted Grade: " << grade;
+         grade = ww_weight + pt_weight + qa_weight;
       } else if (task == 4) {
-         break; 
+         break;
       } else {
          std::cout << std::endl;
          std::cout << "=====================================================" << std::endl;

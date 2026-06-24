@@ -169,6 +169,8 @@ double task_1() {
             break;
          }
       }
+
+      std::cout << written_works.calculate_weight();
    } else if (summative_test == "Performance Tasks") {
       
    } else if (summative_test == "Quarterly Assessment") {
@@ -183,15 +185,6 @@ double task_1() {
    return 00.00;
 }
 
-double predict_grade() {
-   Written_Works written_works;
-   Performance_Tasks performance_tasks;
-   Quarterly_Assessments quarterly_assessments;
-
-   double grade = written_works.calculate_weight() + performance_tasks.calculate_weight() + quarterly_assessments.calculate_weight();
-
-   return grade;
-}
 
 int main() {
 

@@ -71,7 +71,7 @@ class Summative_Tests {
             return 00.00;
          }
  
-         weight = (static_cast<double>(total_scores) / total_items) * percentage;
+         weight = (static_cast<double>(total_scores) / static_cast<double>(total_items)) * percentage;
          weight = round(weight * 100) / 100;
 
          return weight;
@@ -109,15 +109,29 @@ void separator() {
    std::cout << std::endl;
 }
 
+int enterNumberInputAndHandleError(std::string statement, int item) {  
+   while (true) {    
+      std::cout << statement;
+      std::cin >> item;
+      if(std::cin.fail()) {
+         std::cout << "Please type a valid number." << std::endl;
+         std::cout << std::endl;  
+         std::cin.clear(); // reset error    
+         std::cin.ignore(1000, '\n');  // remove bad input
+      } else {
+         break;
+      }
+   }  
+
+   return item;
+}
+
 void add_scores_for_task_1(std::string summative_test, std::vector<int>& scores, std::vector<int>& items, Summative_Tests& summative_tests) {
    while(true) {
       scores = summative_tests.add_scores();
       items = summative_tests.add_items();
 
-      int choice;
-
-      std::cout << "Do you want to continue? (1 if yes, 0 if no): ";
-      std::cin >> choice;
+      int choice = enterNumberInputAndHandleError("Do you want to continue? Type 1 if yes, type 0 if no: ", choice);
 
       separator();
 
@@ -175,7 +189,7 @@ void task_1() {
    } else if (summative_test == "Quarterly Assessment") {
       add_scores_for_task_1("Quarterly Assessment ", quarterly_assessment_scores, quarterly_assessment_items, quarterly_assessment);
    } else {
-      std::cout << "Error!";
+      std::cout << "Error! Summative test does not exist or there is a typo.";
       separator();
    }
 }
@@ -195,12 +209,10 @@ int main() {
    getline(std::cin, name); // use this to accept strings with whitespace
 
    std::cout << std::endl;
-   std::cout << "What is your student number?: ";
-   std::cin >> student_number;
+   student_number = enterNumberInputAndHandleError("What's your student number?", student_number);
 
    std::cout << std::endl;
-   std::cout << "What is your year level?: ";
-   std::cin >> year_level;
+   year_level = enterNumberInputAndHandleError("What's your year level?", year_level);
 
    std::cin.ignore();  // clear leftover newline
    
@@ -222,8 +234,8 @@ int main() {
       std::cout << "[4] Exit" << std::endl;
       std::cout << std::endl;
 
-      std::cout << "What do you want to do today?: ";
-      std::cin >> task;
+      task = enterNumberInputAndHandleError("What do you want to do today?", task);
+
 
       if(task == 1) {
          task_1();
@@ -232,7 +244,6 @@ int main() {
          std::cout << "Please see the .txt file to see your scores and grade." << std::endl;
       } else if (task == 3) {
          separator();
-
          double grade = written_works.calculate_weight() + performance_tasks.calculate_weight() + quarterly_assessment.calculate_weight();   
          std::cout << "Predicted Grade: " << grade << std::endl;
       } else if (task == 4) {

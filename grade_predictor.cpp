@@ -24,96 +24,96 @@
 #include <string>
 #include <fstream>
 #include <iomanip>
+#include <cmath>
 
 class Summative_Tests {
    public:
+      std::string summative_test;
       std::vector <int> scores;
       std::vector <int> items;
       int total_scores = 0;
       int total_items = 0;
+      int percentage = 0;
+      double weight = 00.00;
 
       std::vector<int> add_scores() {
-
-         std::vector <int> list_of_scores;
          int score = 0;
 
          std::cout << "Enter score: ";
          std::cin >> score;
 
-         list_of_scores.push_back(score);
+         scores.push_back(score);
 
-         return list_of_scores;
+         return scores;
       }
 
       std::vector<int> add_items() {
 
-         std::vector <int> list_of_items;
-         int items = 0;
+         int item = 0;
 
          std::cout << "Enter items: ";
-         std::cin >> items;
+         std::cin >> item;
 
-         list_of_items.push_back(items);
+         items.push_back(item);
 
-         return list_of_items;
+         return items;
+      }
+
+      void changeValues(std::string summative_test_value, int percentage_value) {
+         summative_test = summative_test_value;
+         percentage = percentage_value;
+      }
+
+      double calculate_weight() {
+
+         if(total_items == 0) {
+            return 00.00;
+         } else {
+            for (const auto& list_of_scores : scores) {
+               total_scores += list_of_scores;
+            }
+
+            for (const auto& list_of_items : items) {
+               total_items += list_of_items;
+            }
+
+            weight = (static_cast<double>(total_scores) / total_items) * percentage;
+
+            
+            weight = round(weight * 100) / 100;
+
+            return weight;
+         }
       }
 };
 
 class Written_Works : public Summative_Tests {
    public:
-      double calculate_weight() {
-         return total_scores / total_items * 40;
+      Written_Works() {
+         changeValues("Written Works", 40);
       }
 };
 
 class Performance_Tasks : public Summative_Tests {
    public:
-      double calculate_weight() {
-         return total_scores / total_items * 40;
+      Performance_Tasks() {
+         changeValues("Performance Tasks", 40);
       }
 };
 
 class Quarterly_Assessments : public Summative_Tests {
    public:
-      double calculate_weight() {
-         return total_scores / total_items * 40;
+      Quarterly_Assessments() {
+         changeValues("Quarterly Assessments", 20);
       }
 };
 
+Written_Works written_works;
+Performance_Tasks performance_tasks;
+Quarterly_Assessments quarterly_assessment;
 
-void testing_values (std::vector <int> & written_works_scores, std::vector <int> & written_works_items, int ww_total_scores, int ww_total_items) {
-   // Testing if values are added.
-      
-      std::cout << std::endl;
-
-      std::cout << "Written Works Scores: " << std::endl;
-
-      for (int scores : written_works_scores) {
-         std::cout << scores << std::endl;
-      }
-
-      std::cout << std::endl;
-
-      std::cout << "Written Works items: " << std::endl;
-
-      for (int items : written_works_items) {
-         std::cout << items << std::endl;
-      }
-
-   for (const auto& list_of_scores_loop : written_works_scores) {
-      ww_total_scores += list_of_scores_loop;
-   }
-
-   std::cout << std::endl;
-   std::cout << "Written Works Total Scores: " << ww_total_scores << std::endl;
-
-   for (const auto& list_of_items_loop : written_works_items) {
-      ww_total_items += list_of_items_loop;
-   }
-
-   std::cout << std::endl;
-   std::cout << "Written Works Total Items: " << ww_total_items << std::endl;
-
+void add_scores_for_task_1(std::vector <int>& scores, std::vector <int>& items, Summative_Tests& summative_tests) {
+   
 }
 
 double task_1() {
@@ -144,14 +144,10 @@ double task_1() {
    std::cout << "=====================================================" << std::endl;
    std::cout << std::endl;
 
-   Written_Works written_works;
    std::vector <int> written_works_scores;
    std::vector <int> written_works_items;
-   int ww_total_scores = 0;
-   int ww_total_items = 0;
    double ww_weight = 00.00;
 
-   
    std::vector <int> performance_tasks_scores;
    std::vector <int> performance_tasks_items;
    int pt_total_scores = 0;
@@ -179,28 +175,13 @@ double task_1() {
          if (choice == 0) {
             break;
          }
-      }
 
-      for (int scores : written_works_scores) {
-         std::cout << "Written Works: " << scores << std::endl;
-      }
-
-      for (const auto& list_of_scores_loop : written_works_scores) {
-         ww_total_scores += list_of_scores_loop;
-      }
-
-      for (const auto& list_of_items_loop : written_works_items) {
-         ww_total_items += list_of_items_loop;
-      }
-
-
-      return (ww_total_scores / ww_total_items) * 40;
-
-
+         std::cout << "Written Works Weight: " << written_works.calculate_weight();
+   }
    } else if (summative_test == "Performance Tasks") {
-      
+      add_scores_for_task_1(performance_tasks_scores, performance_tasks_items, performance_tasks);
    } else if (summative_test == "Quarterly Assessment") {
-
+      add_scores_for_task_1(quarterly_assessment_scores, quarterly_assessment_items, quarterly_assessment);
    } else {
       std::cout << "Error!";
       std::cout << std::endl;
@@ -211,6 +192,10 @@ double task_1() {
    return 00.00;
 }
 
+double predict_grade() {
+   double grade = written_works.calculate_weight() + performance_tasks.calculate_weight() + quarterly_assessment.calculate_weight();
+   return grade;
+}
 
 int main() {
 
@@ -242,7 +227,7 @@ int main() {
    // std::cout << "What is your section?: ";
    // getline(std::cin, section);
 
-   double grade = 00.00;
+   double grade = predict_grade();
    double ww_weight = 00.00;
    double pt_weight = 00.00;
    double qa_weight = 00.00;
@@ -272,9 +257,9 @@ int main() {
          std::cout << std::endl;
          std::cout << "Please see the .txt file to see your scores and grade." << std::endl;
       } else if (task == 3) {
-         grade = ww_weight + pt_weight + qa_weight;
+         std::cout << "Predicted Grade: " << grade;
       } else if (task == 4) {
-         break;
+         break; 
       } else {
          std::cout << std::endl;
          std::cout << "=====================================================" << std::endl;

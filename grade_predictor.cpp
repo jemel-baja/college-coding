@@ -357,8 +357,7 @@ int main() {
 
    separator();
 
-   std::cout << "THANK YOU FOR USING THE SCIENCE GRADE CALCULATOR!";
-   std::cout << std::endl; 
+   std::cout << "THANK YOU FOR USING THE SCIENCE GRADE CALCULATOR!" << std::endl; 
 
    separator();
    

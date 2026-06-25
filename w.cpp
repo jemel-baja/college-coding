@@ -4,7 +4,7 @@
 #include <fstream>
 
 int main() {
-    std::string name = "Sonzai Heathson A. Katanazo";
+    std::string name;
     std::string section = "Righteous";
     int year_level = 10;
     int student_number = 1800346;
@@ -13,6 +13,21 @@ int main() {
     int total_items = 0;
     int total_scores = 0;
 
+    std::cout << "Enter your full name: ";
+    getline(std::cin, name);
+
+
+    std::ofstream file("grade_predictor.txt");
+
+   file << "Science Grade Predictor" << "\n";
+   file << "\n";
+
+   file << "Name: " << name << "\n";
+   file << "Year and Section: " << year_level << " - " << section << "\n";
+
+   file << "Student Number: " << student_number << "\n";
+   std::cout << "\n";
+   std::cout << "\n";
 
    
 }

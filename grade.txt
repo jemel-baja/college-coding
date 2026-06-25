@@ -1,0 +1,24 @@
+Science Grade Predictor
+
+Name: 1
+Year and Section: 1 - 1
+Student Number: 1
+
+Written Works: 
+        1   2   3   Total
+Scores: 19  20  29   68
+Items:  20  20  30  70
+
+Written Works Weight: 38.86
+Performance Tasks: 
+        1   Total
+Scores: 45   45
+Items:  50  50
+
+Performance Tasks Weight: 36
+Quarterly Assessment: 
+        1   Total
+Scores: 54   54
+Items:  60  60
+
+Quarterly Assessment Weight: 18

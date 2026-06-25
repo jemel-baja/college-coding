@@ -59,8 +59,8 @@ class Summative_Tests {
 
       double calculate_weight() {
 
-         for (const auto& score : scores) {
-            total_scores += score;
+         for (int score = 0; score < scores.size(); score++) {
+            total_scores += scores[score];
          }
 
          for (const auto& item : items) {
@@ -92,16 +92,16 @@ class Performance_Tasks : public Summative_Tests {
       }
 };
 
-class Quarterly_Assessments : public Summative_Tests {
+class Quarterly_Assessment : public Summative_Tests {
    public:
-      Quarterly_Assessments() {
-         changeValues("Quarterly Assessments", 20);
+      Quarterly_Assessment() {
+         changeValues("Quarterly Assessment", 20);
       }
 };
 
 Written_Works written_works;
 Performance_Tasks performance_tasks;
-Quarterly_Assessments quarterly_assessment;
+Quarterly_Assessment quarterly_assessment;
 
 void separator() {
    std::cout << std::endl;
@@ -130,7 +130,9 @@ void add_scores_to_file(std::string summative_test_name, Summative_Tests& summat
 
    double weight = 00.00;
 
-   std::ofstream file("science.grades.txt");
+   std::ofstream file("grade.txt", std::ios::app);
+
+   file << "\n";
 
    file << summative_test_name << ": " << "\n";
 
@@ -144,13 +146,11 @@ void add_scores_to_file(std::string summative_test_name, Summative_Tests& summat
 
    file << "Scores: ";
 
+
    for (const auto& score : summative_tests.scores) {
       file << score << "  ";
    }
 
-   for (const auto& list_of_scores : summative_tests.scores) {
-      summative_tests.total_scores += list_of_scores;
-   }
    file << " " << summative_tests.total_scores;
 
    file << "\nItems: ";
@@ -158,16 +158,15 @@ void add_scores_to_file(std::string summative_test_name, Summative_Tests& summat
         file << " " << item << " ";
    }
 
-   for (const auto& list_of_items : summative_tests.items) {
-      summative_tests.total_items += list_of_items;
-   }
    file << " " << summative_tests.total_items << '\n';
    file << '\n';
 
    weight = (static_cast<double>(summative_tests.total_scores) / static_cast<double>(summative_tests.total_items)) * summative_tests.percentage;
    weight = round(weight * 100) / 100;
 
-   file << summative_test_name << " Weight: ";
+   file << summative_test_name << " Weight: " << weight;
+
+   file.close();
 }
 
 
@@ -214,25 +213,25 @@ void task_1() {
 
    std::vector <int> written_works_scores;
    std::vector <int> written_works_items;
-   double ww_weight = 00.00;
 
    std::vector <int> performance_tasks_scores;
    std::vector <int> performance_tasks_items;
-   int pt_total_scores = 0;
-   int pt_total_items = 0;
 
    std::vector <int> quarterly_assessment_scores;
    std::vector <int> quarterly_assessment_items;
-   int qa_total_scores = 0;
-   int qa_total_items = 0;
 
    if (summative_test == "Written Works") {
       add_scores_for_task_1("Written Works ", written_works_scores, written_works_items, written_works);
-      std::cout << "Written Works: " << ww_weight;
+      add_scores_to_file("Written Works", written_works);
+      std::cout << "Written Works: " << written_works.calculate_weight() << std::endl;
    } else if (summative_test == "Performance Tasks") {
       add_scores_for_task_1("Performance Tasks ", performance_tasks_scores, performance_tasks_items, performance_tasks);
+      add_scores_to_file("Performance Tasks", performance_tasks);
+      std::cout << "Performance Tasks: " << performance_tasks.calculate_weight() << std::endl;
    } else if (summative_test == "Quarterly Assessment") {
       add_scores_for_task_1("Quarterly Assessment ", quarterly_assessment_scores, quarterly_assessment_items, quarterly_assessment);
+      add_scores_to_file("Quarterly Assessment", quarterly_assessment);
+      std::cout << "Quarterly Assessment: " << quarterly_assessment.calculate_weight() << std::endl;
    } else {
       std::cout << "Error! Summative test does not exist or there is a typo.";
       separator();
@@ -290,10 +289,10 @@ int main() {
    getline(std::cin, name); // use this to accept strings with whitespace
 
    std::cout << std::endl;
-   student_number = enterNumberInputAndHandleError("What's your student number?", student_number);
+   student_number = enterNumberInputAndHandleError("What's your student number?: ", student_number);
 
    std::cout << std::endl;
-   year_level = enterNumberInputAndHandleError("What's your year level?", year_level);
+   year_level = enterNumberInputAndHandleError("What's your year level?: ", year_level);
 
    std::cin.ignore();  // clear leftover newline
    
@@ -303,7 +302,12 @@ int main() {
 
    // STEP 02. ADD STUDENT'S INFORMATION TO THE FILE
 
-   std::ofstream file("science_grades.txt");
+   std::ofstream file("grade.txt");
+
+   if (!file.is_open()) {
+    std::cout << "Failed to open file!\n";
+    return 1;
+   }
 
    file << "Science Grade Predictor" << "\n";
    file << "\n";
@@ -314,6 +318,8 @@ int main() {
    file << "Student Number: " << student_number << "\n";
    std::cout << "\n";
    std::cout << "\n";
+
+   file.close();
 
    // STEP 03. MAIN PROGRAM
 
@@ -329,7 +335,7 @@ int main() {
       std::cout << "[4] Exit" << std::endl;
       std::cout << std::endl;
 
-      task = enterNumberInputAndHandleError("What do you want to do today?", task);
+      task = enterNumberInputAndHandleError("What do you want to do today?: ", task);
 
 
       if(task == 1) {

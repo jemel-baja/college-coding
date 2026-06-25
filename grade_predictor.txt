@@ -1,0 +1,28 @@
+Name: [User's full name here]
+Grade Level and Section: [Year Level] - [Section]
+Student Number: [Student Number]
+
+Science Grade Predictor
+
+Written Works
+                                                       Total
+Scores: [Score 1] [Score 2] [Score 3] [Score 4] [...] 
+Items:  [Items 1] [Items 2] [...]
+
+Weight: [Weight]%
+
+Performance Tasks
+                                                       Total
+Scores: [Score 1] [Score 2] [Score 3] [Score 4] [...] 
+Items:  [Items 1] [Items 2] [...]
+
+Weight: [Weight]%
+
+Quarterly Assessment
+                                                       Total
+Scores: [Score 1] [Score 2] [Score 3] [Score 4] [...] 
+Items:  [Items 1] [Items 2] [...]
+
+Weight: [Weight]%
+
+Predicted Grade: [Grade]

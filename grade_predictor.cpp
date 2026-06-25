@@ -15,9 +15,9 @@
 
 #include <iostream>
 #include <string>
+#include <cmath>
 #include <fstream>
 #include <iomanip>
-#include <cmath>
 
 class Summative_Tests {
    public:
@@ -126,6 +126,51 @@ int enterNumberInputAndHandleError(std::string statement, int item) {
    return item;
 }
 
+void add_scores_to_file(std::string summative_test_name, Summative_Tests& summative_tests) {
+
+   double weight = 00.00;
+
+   std::ofstream file("science.grades.txt");
+
+   file << summative_test_name << ": " << "\n";
+
+
+   file << "        ";
+   for (int whitespace = 1; whitespace <= summative_tests.scores.size(); whitespace++) {
+      file << whitespace << "   ";
+   }
+
+   file << "Total\n";
+
+   file << "Scores: ";
+
+   for (const auto& score : summative_tests.scores) {
+      file << score << "  ";
+   }
+
+   for (const auto& list_of_scores : summative_tests.scores) {
+      summative_tests.total_scores += list_of_scores;
+   }
+   file << " " << summative_tests.total_scores;
+
+   file << "\nItems: ";
+   for (const auto& item : summative_tests.items) {
+        file << " " << item << " ";
+   }
+
+   for (const auto& list_of_items : summative_tests.items) {
+      summative_tests.total_items += list_of_items;
+   }
+   file << " " << summative_tests.total_items << '\n';
+   file << '\n';
+
+   weight = (static_cast<double>(summative_tests.total_scores) / static_cast<double>(summative_tests.total_items)) * summative_tests.percentage;
+   weight = round(weight * 100) / 100;
+
+   file << summative_test_name << " Weight: ";
+}
+
+
 void add_scores_for_task_1(std::string summative_test, std::vector<int>& scores, std::vector<int>& items, Summative_Tests& summative_tests) {
    while(true) {
       scores = summative_tests.add_scores();
@@ -194,6 +239,42 @@ void task_1() {
    }
 }
 
+/*
+
+   Content of the File
+
+   Science Grade Predictor
+   Name: [User's full name here]
+   Grade Level and Section: [Year Level] - [Section]
+   Student Number: [Student Number]
+
+
+
+   Written Works
+                                                         Total
+   Scores: [Score 1] [Score 2] [Score 3] [Score 4] [...] 
+   Items:  [Items 1] [Items 2] [...]
+
+   Weight: [Weight]%
+
+   Performance Tasks
+                                                         Total
+   Scores: [Score 1] [Score 2] [Score 3] [Score 4] [...] 
+   Items:  [Items 1] [Items 2] [...]
+
+   Weight: [Weight]%
+
+   Quarterly Assessment
+                                                         Total
+   Scores: [Score 1] [Score 2] [Score 3] [Score 4] [...] 
+   Items:  [Items 1] [Items 2] [...]
+
+   Weight: [Weight]%
+
+   Predicted Grade: [Grade]
+*/
+
+
 int main() {
 
    // STEP 01. GET STUDENT'S INFORMATION
@@ -220,7 +301,21 @@ int main() {
    std::cout << "What is your section?: ";
    getline(std::cin, section);
 
-   // STEP 02. MAIN PROGRAM
+   // STEP 02. ADD STUDENT'S INFORMATION TO THE FILE
+
+   std::ofstream file("science_grades.txt");
+
+   file << "Science Grade Predictor" << "\n";
+   file << "\n";
+
+   file << "Name: " << name << "\n";
+   file << "Year and Section: " << year_level << " - " << section << "\n";
+
+   file << "Student Number: " << student_number << "\n";
+   std::cout << "\n";
+   std::cout << "\n";
+
+   // STEP 03. MAIN PROGRAM
 
    while(true) {
       

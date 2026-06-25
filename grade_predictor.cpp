@@ -280,6 +280,7 @@ int main() {
 
    std::string name, section, subject;
    int student_number, year_level;
+   double grade = written_works.calculate_weight() + performance_tasks.calculate_weight() + quarterly_assessment.calculate_weight();   
 
    std::cout << std::endl;
    std::cout << "WELCOME TO THE SCIENCE GRADE PREDICTOR!" << std::endl;
@@ -360,6 +361,10 @@ int main() {
    std::cout << "THANK YOU FOR USING THE SCIENCE GRADE CALCULATOR!" << std::endl; 
 
    separator();
+
+   std::ofstream file("grade.txt", std::ios::app);
+
+   file << "\nPredicted Grade: " << grade;
    
    return 0;
 

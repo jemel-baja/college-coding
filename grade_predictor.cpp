@@ -164,7 +164,8 @@ void add_scores_to_file(std::string summative_test_name, Summative_Tests& summat
    weight = (static_cast<double>(summative_tests.total_scores) / static_cast<double>(summative_tests.total_items)) * summative_tests.percentage;
    weight = round(weight * 100) / 100;
 
-   file << summative_test_name << " Weight: " << weight;
+   file << summative_test_name << " Weight: " << weight << "\n";
+
 
    file.close();
 }
@@ -281,47 +282,56 @@ int main() {
    std::string name, section, subject;
    int student_number, year_level;
    double grade = written_works.calculate_weight() + performance_tasks.calculate_weight() + quarterly_assessment.calculate_weight();   
+   bool skip = false;
+
+   std::ofstream file("grade.txt");
+   
+   if (!file.is_open()) {
+      std::cout << "Failed to open file!\n";
+      return 1;
+   }
 
    std::cout << std::endl;
    std::cout << "WELCOME TO THE SCIENCE GRADE PREDICTOR!" << std::endl;
    separator();
 
-   std::cout << "What is your name?: ";
+   std::cout << "What is your name? (Type 'skip' if you are the same person): ";
    getline(std::cin, name); // use this to accept strings with whitespace
-
    std::cout << std::endl;
-   student_number = enterNumberInputAndHandleError("What's your student number?: ", student_number);
 
-   std::cout << std::endl;
-   year_level = enterNumberInputAndHandleError("What's your year level?: ", year_level);
-
-   std::cin.ignore();  // clear leftover newline
-   
-   std::cout << std::endl;
-   std::cout << "What is your section?: ";
-   getline(std::cin, section);
-
-   // STEP 02. ADD STUDENT'S INFORMATION TO THE FILE
-
-   std::ofstream file("grade.txt");
-
-   if (!file.is_open()) {
-    std::cout << "Failed to open file!\n";
-    return 1;
+   if (name == "skip") {
+      skip = true;
    }
 
-   file << "Science Grade Predictor" << "\n";
-   file << "\n";
+   if (!skip) {
 
-   file << "Name: " << name << "\n";
-   file << "Year and Section: " << year_level << " - " << section << "\n";
+      student_number = enterNumberInputAndHandleError("What's your student number?: ", student_number);
 
-   file << "Student Number: " << student_number << "\n";
-   std::cout << "\n";
-   std::cout << "\n";
+      std::cout << std::endl;
+      year_level = enterNumberInputAndHandleError("What's your year level?: ", year_level);
 
-   file.close();
+      std::cin.ignore();  // clear leftover newline
+      
+      std::cout << std::endl;
+      std::cout << "What is your section?: ";
+      getline(std::cin, section);
 
+      // STEP 02. ADD STUDENT'S INFORMATION TO THE FILE
+
+      file << "Science Grade Predictor" << "\n";
+      file << "\n";
+
+      file << "Name: " << name << "\n";
+      file << "Year and Section: " << year_level << " - " << section << "\n";
+
+      file << "Student Number: " << student_number << "\n";
+      std::cout << "\n";
+      std::cout << "\n";
+
+      file.close();
+
+   }
+ 
    // STEP 03. MAIN PROGRAM
 
    while(true) {
@@ -361,10 +371,10 @@ int main() {
    std::cout << "THANK YOU FOR USING THE SCIENCE GRADE CALCULATOR!" << std::endl; 
 
    separator();
+   
+   file.open("grade.txt", std::ios::app);
 
-   std::ofstream file("grade.txt", std::ios::app);
-
-   file << "\nPredicted Grade: " << grade;
+   file << "Predicted Grade: " << grade;
    
    return 0;
 

@@ -1,0 +1,12 @@
+Science Grade Predictor
+
+Name: heathson
+Year and Section: 10 - righteous
+Student Number: 1800911
+
+Written Works: 
+        1   2   Total
+Scores: 19  20   39
+Items:  20  20  40
+
+Written Works Weight: 39
